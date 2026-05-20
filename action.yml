@@ -5,6 +5,9 @@ branding:
   icon: 'file-text'
   color: 'green'
 
+categories:
+  - 'Code Management'
+
 inputs:
   token:
     description: 'GitHub token for API access (issues, PRs, releases). Uses GITHUB_TOKEN by default.'
