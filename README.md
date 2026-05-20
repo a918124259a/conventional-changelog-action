@@ -2,10 +2,14 @@
 
 > **Auto-generate beautiful CHANGELOG.md files from Conventional Commits — with GitHub Releases integration, smart version detection, and sponsor-only premium features.**
 
-[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-Changelog%20Generator-brightgreen?logo=github)](https://github.com/marketplace)
+[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-Conventional%20Changelog%20Action-brightgreen?logo=github)](https://github.com/marketplace/actions/conventional-changelog-action)
+[![GitHub Release](https://img.shields.io/github/v/release/a918124259a/conventional-changelog-action?logo=github&color=blue)](https://github.com/a918124259a/conventional-changelog-action/releases)
+[![GitHub Stars](https://img.shields.io/github/stars/a918124259a/conventional-changelog-action?style=social)](https://github.com/a918124259a/conventional-changelog-action)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-blue.svg)](https://conventionalcommits.org)
 [![Keep a Changelog](https://img.shields.io/badge/Keep%20a%20Changelog-1.1.0-%23E05735)](https://keepachangelog.com)
-[![GitHub Sponsors](https://img.shields.io/badge/Sponsor-%E2%9D%A4%EF%B8%8F-ff69b4?logo=githubsponsors)](https://github.com/sponsors)
+[![Docker](https://img.shields.io/badge/Docker-Alpine-0db7ed?logo=docker)](https://github.com/a918124259a/conventional-changelog-action/pkgs/container/conventional-changelog-action)
+[![GitHub Sponsors](https://img.shields.io/badge/Sponsor-%E2%9D%A4%EF%B8%8F-ff69b4?logo=githubsponsors)](https://github.com/sponsors/a918124259a)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
 
@@ -52,7 +56,7 @@ jobs:
           fetch-depth: 0  # Required for tag history
 
       - name: Generate Changelog
-        uses: your-org/changelog-generator@v1
+        uses: a918124259a/conventional-changelog-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -152,7 +156,7 @@ jobs:
 
       - name: Generate Changelog
         id: changelog
-        uses: your-org/changelog-generator@v1
+        uses: a918124259a/conventional-changelog-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           create-release: 'true'
@@ -227,7 +231,7 @@ This action is **free and open source** for basic use. Premium features require 
 | **🚀 Pro** | $15/mo | All premium features + priority support |
 | **🏢 Enterprise** | Custom | Custom templates, SLA, dedicated support |
 
-[→ Become a Sponsor](https://github.com/sponsors/your-org)
+[→ Become a Sponsor](https://github.com/sponsors/a918124259a)
 
 ---
 
