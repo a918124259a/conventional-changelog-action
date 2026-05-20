@@ -27,7 +27,9 @@
 ### ⭐ Premium Features (Sponsors Only)
 
 | Feature | Description |
-|---------|-------------|
+|
+[![Docs](https://img.shields.io/badge/docs-website-blue)](https://a918124259a.github.io/conventional-changelog-action/)
+---------|-------------|
 | 🎨 **Custom Templates** | Choose from `classic`, `minimal`, `modern`, `detailed`, or `json` themes |
 | 😄 **Emoji Decorations** | Auto-add emoji icons next to each commit type |
 | 📊 **AI Summary** | Auto-generated executive summary of release changes |
