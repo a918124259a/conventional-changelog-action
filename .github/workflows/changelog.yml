@@ -1,0 +1,68 @@
+# Example workflow: Auto-generate changelog on every push to main
+# This demonstrates the full feature set including premium/sponsor features
+
+name: Generate Changelog
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      create_release:
+        description: 'Create a GitHub Release?'
+        required: true
+        default: 'true'
+        type: boolean
+
+env:
+  CHANGELOG_IMAGE: ghcr.io/${{ github.repository }}/changelog-generator:latest
+
+jobs:
+  generate-changelog:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate Changelog
+        id: changelog
+        uses: ./
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag-prefix: 'v'
+          output-file: 'CHANGELOG.md'
+          include-commits: 'feat,fix,perf,refactor,docs,style,test,chore'
+          group-by-scope: 'true'
+          include-links: 'true'
+          include-breaking: 'true'
+          create-release: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.create_release || 'false' }}
+          premium-emojis: 'true'
+          premium-summary: 'true'
+          premium-contributors: 'true'
+
+      - name: Commit updated changelog
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [[ -n "$(git status --porcelain CHANGELOG.md)" ]]; then
+            git add CHANGELOG.md
+            git commit -m "docs: update CHANGELOG.md [skip ci]"
+            git push
+            echo "✅ Changelog committed"
+          else
+            echo "ℹ️ No changes to CHANGELOG.md"
+          fi
+
+      - name: Print release notes
+        if: steps.changelog.outputs.version != ''
+        run: |
+          echo "## 📋 Release v${{ steps.changelog.outputs.version }}"
+          echo ""
+          echo "${{ steps.changelog.outputs.release-notes }}"

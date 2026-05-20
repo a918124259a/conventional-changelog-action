@@ -1,0 +1,5 @@
+*.md~
+*.swp
+*.swo
+.DS_Store
+.env

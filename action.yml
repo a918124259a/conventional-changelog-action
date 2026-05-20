@@ -1,0 +1,113 @@
+name: 'Changelog Generator'
+description: 'Auto-generate professional CHANGELOG.md from Conventional Commits with GitHub Releases integration, smart grouping, and sponsor-only premium features.'
+author: 'changelog-generator'
+branding:
+  icon: 'file-text'
+  color: 'green'
+
+inputs:
+  token:
+    description: 'GitHub token for API access (issues, PRs, releases). Uses GITHUB_TOKEN by default.'
+    required: false
+    default: ${{ github.token }}
+  tag-prefix:
+    description: 'Prefix for version tags (e.g., "v"). Use empty string for no prefix.'
+    required: false
+    default: 'v'
+  output-file:
+    description: 'Path for the generated changelog file.'
+    required: false
+    default: 'CHANGELOG.md'
+  header:
+    description: 'Custom header text at the top of the changelog.'
+    required: false
+    default: '# Changelog\n\nAll notable changes to this project will be documented in this file.\n\nThe format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),\nand this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).\n'
+  release-branch:
+    description: 'Branch to scan for releases/tags (default: current branch).'
+    required: false
+    default: ''
+  include-commits:
+    description: 'Comma-separated commit types to include. Default: feat,fix,perf,refactor,docs,style,test,chore,build,ci,revert.'
+    required: false
+    default: ''
+  exclude-types:
+    description: 'Comma-separated commit types to exclude from changelog.'
+    required: false
+    default: ''
+  group-by-scope:
+    description: 'Group commits by scope within each section (true/false).'
+    required: false
+    default: 'false'
+  include-links:
+    description: 'Include commit links and issue references (true/false).'
+    required: false
+    default: 'true'
+  include-breaking:
+    description: 'Flag breaking changes prominently (true/false).'
+    required: false
+    default: 'true'
+  create-release:
+    description: 'Auto-create a GitHub Release with the changelog entry (true/false).'
+    required: false
+    default: 'false'
+  unreleased-label:
+    description: 'Label for unreleased changes section.'
+    required: false
+    default: 'Unreleased'
+  compare-url:
+    description: 'Custom compare URL template. Use {{from}} and {{to}} as placeholders.'
+    required: false
+    default: ''
+  
+  # Sponsors-only premium features
+  premium-template:
+    description: '[★ Sponsors Only] Custom template theme: classic, minimal, modern, detailed, json, markdown.'
+    required: false
+    default: 'classic'
+  premium-emojis:
+    description: '[★ Sponsors Only] Add emoji icons next to commit types (true/false).'
+    required: false
+    default: 'false'
+  premium-summary:
+    description: '[★ Sponsors Only] Auto-generate AI-style executive summary of changes.'
+    required: false
+    default: 'false'
+  premium-contributors:
+    description: '[★ Sponsors Only] List contributors for each release section.'
+    required: false
+    default: 'false'
+  premium-links:
+    description: '[★ Sponsors Only] Link type: github, gitlab, bitbucket, gitea.'
+    required: false
+    default: 'github'
+
+outputs:
+  changelog:
+    description: 'The full generated changelog content.'
+  version:
+    description: 'The latest version number detected.'
+  release-notes:
+    description: 'The changelog entry for the latest release (excluding unreleased).'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.token }}
+    - ${{ inputs.tag-prefix }}
+    - ${{ inputs.output-file }}
+    - ${{ inputs.header }}
+    - ${{ inputs.release-branch }}
+    - ${{ inputs.include-commits }}
+    - ${{ inputs.exclude-types }}
+    - ${{ inputs.group-by-scope }}
+    - ${{ inputs.include-links }}
+    - ${{ inputs.include-breaking }}
+    - ${{ inputs.create-release }}
+    - ${{ inputs.unreleased-label }}
+    - ${{ inputs.compare-url }}
+    - ${{ inputs.premium-template }}
+    - ${{ inputs.premium-emojis }}
+    - ${{ inputs.premium-summary }}
+    - ${{ inputs.premium-contributors }}
+    - ${{ inputs.premium-links }}
