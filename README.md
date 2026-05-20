@@ -10,6 +10,7 @@
 [![Docker](https://img.shields.io/badge/Docker-Alpine-0db7ed?logo=docker)](https://github.com/a918124259a/conventional-changelog-action/pkgs/container/conventional-changelog-action)
 [![GitHub Sponsors](https://img.shields.io/badge/Sponsor-%E2%9D%A4%EF%B8%8F-ff69b4?logo=githubsponsors)](https://github.com/sponsors/a918124259a)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Read the Guide](https://img.shields.io/badge/Read%20the-Guide-blueviolet?logo=readthedocs)](GUIDE.md)
 
 ---
 
